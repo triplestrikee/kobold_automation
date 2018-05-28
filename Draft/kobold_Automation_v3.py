@@ -4,12 +4,11 @@ from time import sleep
 import datetime
 import sys
 
-
+# set up the test environment
 now = datetime.datetime.now()
 newFolderName = "Kobold_XB1_Test_" + now.strftime("%Y_%m_%d_%H%M")
 print(newFolderName)
 
-# set up the test environment
 new_asserts_test_folder_name = 'greeting3' 
 source_path = r'C:\Kobold_Test_Files\Test XB1 source'
 input_path = r'\\eac-fs1.eac.ad.ea.com\cqe_kobold$\eac-kobold-dev\Input\dev\ManualBuildCopyTests\XB1' +'/' + new_asserts_test_folder_name
@@ -25,7 +24,6 @@ print(copy_file_destination_path)
 # sleep(200)
 
 ## shutil.rmtree(copy_file_destination_path)
-
 
 
 # ----------------List of all the files ----------------
