@@ -3,16 +3,19 @@ import datetime
 import sys
 import os
 
-str = input('Please enter a string: ')
-count = 0
-for i in range(len(str)):
-  if(str[i] == ' '):
-    count = count + 1
+myStr = input('Please input a string: ')
 
-print('Number of the whitespace in the string is: ',count)
+def countWhiteSpace(str):
+  count = 0
+  for i in range(len(str)):
+    if(str[i] == ' '):
+      count += 1
+  return count
 
-print('Hi ni hao {}'.format(count))
+print('Number of the whitespace in the string is: ',countWhiteSpace(myStr))
+print('Number of the whitespace in the input string is: {}'.format(countWhiteSpace(myStr)))
 
 now = datetime.datetime.now()
-newDirName = "Kobold_XB1_Test " + now.strftime("%Y_%m_%d-%H%M")
+newDirName = "Kobold_XB1_Test_" + now.strftime("%Y_%m_%d-%H%M")
 print(newDirName)
+
