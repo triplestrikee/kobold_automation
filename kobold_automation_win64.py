@@ -6,15 +6,23 @@ from time import sleep
 import datetime
 import sys
 
-# set up the test environment
+# create the test folder
 now = datetime.datetime.now()
 newFolderName = "Kobold_XB1_Test_" + now.strftime("%Y_%m_%d_%H%M")
 print(newFolderName)
 
-new_asserts_test_folder_name = 'greeting3' 
+# new_asserts_test_folder_name = 'greeting3' 
+
+# xbox file path
+# source_path = r'C:\Kobold_Test_Files\Test XB1 source'
+# input_path = r'C:\Kobold_Test_Files\Test XB1 input' 
+# output_path = r'C:\Kobold_Test_Files\Test XB1 output'
+
+# wid64 file path
 source_path = r'C:\Kobold_Test_Files\Test Win64 source'
 input_path = r'C:\Kobold_Test_Files\Test Win64 input' 
 output_path = r'C:\Kobold_Test_Files\Test Win64 output'
+
 copy_file_destination_path = input_path 
 
 print(input_path)
@@ -113,57 +121,76 @@ compressed_source_file_name_elf
 )
 
 
-# print ('----------------List of all files in the input folder ----------------')
-# input_files = os.listdir(input_path)
-# os.chdir(input_path)
-# input_file_name = []
-# for f in input_files:
-#    input_file_name.append(f) 
+print ('----------------List of all files in the input folder ----------------')
+input_files = os.listdir(input_path)
+os.chdir(input_path)
+input_file_name = []
+for f in input_files:
+   input_file_name.append(f) 
 
-# print(input_file_name)
+#check the presnece of each file
+for i in range(len(source_file_name_bpb)):
+  if source_file_name_bpb[i] in input_file_name:
+    print('Yes')
+  else:
+    print("missing: ", source_file_name_bpb[i])
+
+for i in range(len(source_file_name_pdb)):
+  if source_file_name_pdb[i] in input_file_name:
+    print('Yes')
+  else:
+    print("missing: ", source_file_name_pdb[i])
+
+for i in range(len(source_file_name_dll)):
+  if source_file_name_dll[i] in input_file_name:
+    print('Yes')
+  else:
+    print("missing: ", source_file_name_dll[i])
+
+for i in range(len(source_file_name_exe)):
+  if source_file_name_exe[i] in input_file_name:
+    print('Yes')
+  else:
+    print("missing: ", source_file_name_exe[i])
+
+for i in range(len(source_file_name_info)):
+  if source_file_name_info[i] in input_file_name:
+    print('Yes')
+  else:
+    print("missing: ", source_file_name_info[i])
 
 
-# if source_file_name_bpb in input_file_name:
-#   print('Yes')
-# else:
-#   print("no")
 
-# if source_file_name_exe in input_file_name:
-#   print('Yes')
-# else:
-#   print("no")
+print ('----------------List of all files in the output folder ----------------')
+output_files = os.listdir(output_path)
+os.chdir(output_path)
+output_file_name = []
+for f in output_files:
+  output_file_name.append(f)
 
-# if source_file_name_info in input_file_name:
-#   print('Yes')
-# else:
-#   print("no")
-  
-# if source_file_name_pdb in input_file_name:
-#   print('Yes')
-# else:
-#   print("no")
+#checking the presence of each compressed file
+for i in range(len(compressed_source_file_name_pdb)):
+  if compressed_source_file_name_pdb[i] in output_file_name:
+    print('Yes')
+  else:
+    print("missing: ", compressed_source_file_name_pdb[i])
 
 
-# print ('----------------List of all files in the output folder ----------------')
-# output_files = os.listdir(output_path)
-# os.chdir(output_path)
-# output_file_name = []
-# for f in output_files:
-#   output_file_name.append(f)
-   
-# print(output_file_name)
+for i in range(len(compressed_source_file_name_dll)):
+  if compressed_source_file_name_dll[i] in output_file_name:
+    print('Yes')
+  else:
+    print("missing: ", compressed_source_file_name_dll[i])
 
-# if source_file_name_bpb_compressed in output_file_name:
-#   print('Yes')
-# else:
-#   print("no")
+for i in range(len(compressed_source_file_name_bpb)):
+  if compressed_source_file_name_bpb[i] in output_file_name:
+    print('Yes')
+  else:
+    print("missing: ", compressed_source_file_name_bpb[i])
 
-# if source_file_name_exe_compressed in output_file_name:
-#   print('Yes')
-# else:
-#   print("no")
+for i in range(len(compressed_source_file_name_exe)):
+  if compressed_source_file_name_exe[i] in output_file_name:
+    print('Yes')
+  else:
+    print("missing: ", compressed_source_file_name_exe[i])
 
-# if source_file_name_pdb_compressed in output_file_name:
-#   print('Yes')
-# else:
-#   print("no")
