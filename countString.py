@@ -1,6 +1,11 @@
-file  = open('ee684b16-b790-4cfa-b8e4-b077455cda2.fba', 'r').read()
-str  = '''AggregationReport","Payload":{"AggregationType":"FrameAnalysis","Snapshot":{"Type":1,"Name":"Slice'''
-count = file.count(str)
+str = input('Please enter a string here: ')
+count = 0
+for i in range(len(str)):
+  if str[i] == ' ':
+    count = count + 1
 
-print(count)
+print('The number of white space in the string is: ', count) 
+print('The string you entered is: ', str) 
+
+
 

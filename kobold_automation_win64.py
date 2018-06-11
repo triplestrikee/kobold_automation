@@ -25,6 +25,9 @@ output_path = r'C:\Kobold_Test_Files\Test Win64 output'
 
 copy_file_destination_path = input_path 
 
+# set up the flag
+pass_the_script_flag = 1
+
 print(input_path)
 print(output_path)
 print(copy_file_destination_path)
@@ -36,7 +39,7 @@ print(copy_file_destination_path)
 ## shutil.rmtree(copy_file_destination_path)
 
 
-# ----------------List of all the files ----------------
+# ----------------Get all the file names ----------------
 source_files = os.listdir(source_path)
 os.chdir(source_path)
 
@@ -45,8 +48,7 @@ for f in source_files:
    file_name, file_ext = os.path.splitext(f)
    source_file_name.append(file_name)
 
-# remove duplicated elements
-# source_file_name = list(set(source_file_name))
+#generate input file names +.gz
 source_files.sort()
 source_files.sort()
 
@@ -61,21 +63,21 @@ source_file_name_elf = []
 for i in range(len(source_files)-1):
   #win64 file
   if source_file_name[i] == source_file_name[i+1] and source_files[i].endswith('.dll') and source_files[i+1].endswith('.pdb'):
-    source_file_name_dll.append(source_file_name[i] + '.dll') 
-    source_file_name_bpb.append(source_file_name[i] + '.bpb') 
-    source_file_name_info.append(source_file_name[i] + '.info') 
-    source_file_name_pdb.append(source_file_name[i] + '.pdb') 
+      source_file_name_dll.append(source_file_name[i] + '.dll') 
+      source_file_name_bpb.append(source_file_name[i] + '.bpb') 
+      source_file_name_info.append(source_file_name[i] + '.info') 
+      source_file_name_pdb.append(source_file_name[i] + '.pdb') 
   #xbox file
   if source_file_name[i] == source_file_name[i+1] and source_files[i].endswith('.exe') and source_files[i+1].endswith('.pdb'):
-    source_file_name_exe.append(source_file_name[i] + '.exe')        
-    source_file_name_bpb.append(source_file_name[i] + '.bpb') 
-    source_file_name_info.append(source_file_name[i] + '.info') 
-    source_file_name_pdb.append(source_file_name[i] + '.pdb') 
+      source_file_name_exe.append(source_file_name[i] + '.exe')        
+      source_file_name_bpb.append(source_file_name[i] + '.bpb') 
+      source_file_name_info.append(source_file_name[i] + '.info') 
+      source_file_name_pdb.append(source_file_name[i] + '.pdb') 
   #ps4 file
   if source_files[i].endswith('.efl'):
-    source_file_name_bpb.append(source_file_name[i] + '.bpb')
-    source_file_name_elf.append(source_file_name[i] + '.elf')
-    source_file_name_info.append(source_file_name[i] + '.info') 
+      source_file_name_bpb.append(source_file_name[i] + '.bpb')
+      source_file_name_elf.append(source_file_name[i] + '.elf')
+      source_file_name_info.append(source_file_name[i] + '.info') 
 
 #generate output file names +.gz
 compressed_source_file_name_pdb =  []
@@ -112,16 +114,17 @@ source_file_name_elf
 
 print('output files--------------------')
 
-print(
-compressed_source_file_name_pdb,
-compressed_source_file_name_dll,
-compressed_source_file_name_bpb,
-compressed_source_file_name_exe,
-compressed_source_file_name_elf
-)
+# print(
+# compressed_source_file_name_pdb,
+# compressed_source_file_name_dll,
+# compressed_source_file_name_bpb,
+# compressed_source_file_name_exe,
+# compressed_source_file_name_elf
+# )
 
 
-print ('----------------List of all files in the input folder ----------------')
+print ('----------------check the presnece of each file in the input folder ----------------')
+print ('_________________________________________________')
 input_files = os.listdir(input_path)
 os.chdir(input_path)
 input_file_name = []
@@ -131,37 +134,42 @@ for f in input_files:
 #check the presnece of each file
 for i in range(len(source_file_name_bpb)):
   if source_file_name_bpb[i] in input_file_name:
-    print('Yes')
+    print(input_path +'\\'+ source_file_name_bpb[i], 'Checked')
   else:
-    print("missing: ", source_file_name_bpb[i])
+    pass_the_script_flag = pass_the_script_flag - 1    
+    print(input_path +'\\'+ source_file_name_bpb[i], 'Missing')
 
 for i in range(len(source_file_name_pdb)):
   if source_file_name_pdb[i] in input_file_name:
-    print('Yes')
+    print(input_path +'\\'+ source_file_name_pdb[i], 'Checked')
   else:
-    print("missing: ", source_file_name_pdb[i])
+    pass_the_script_flag = pass_the_script_flag - 1  
+    print(input_path +'\\'+ source_file_name_pdb[i], 'Missing')
 
 for i in range(len(source_file_name_dll)):
   if source_file_name_dll[i] in input_file_name:
-    print('Yes')
+    print(input_path +'\\'+ source_file_name_dll[i], 'Checked')
   else:
-    print("missing: ", source_file_name_dll[i])
+    pass_the_script_flag = pass_the_script_flag - 1  
+    print(input_path +'\\'+ source_file_name_dll[i], 'Missing')
 
 for i in range(len(source_file_name_exe)):
   if source_file_name_exe[i] in input_file_name:
-    print('Yes')
+    print(input_path +'\\'+ source_file_name_exe[i], 'Checked')
   else:
-    print("missing: ", source_file_name_exe[i])
+    pass_the_script_flag = pass_the_script_flag - 1  
+    print(input_path +'\\'+ source_file_name_exe[i], 'Missing')
 
 for i in range(len(source_file_name_info)):
   if source_file_name_info[i] in input_file_name:
-    print('Yes')
+    print(input_path +'\\'+ source_file_name_info[i], 'Checked')
   else:
-    print("missing: ", source_file_name_info[i])
+    pass_the_script_flag = pass_the_script_flag - 1  
+    print(input_path +'\\'+ source_file_name_info[i], 'Missing')
 
 
 
-print ('----------------List of all files in the output folder ----------------')
+print ('----------------check the presnece of each file in the output folder ----------------')
 output_files = os.listdir(output_path)
 os.chdir(output_path)
 output_file_name = []
@@ -171,26 +179,35 @@ for f in output_files:
 #checking the presence of each compressed file
 for i in range(len(compressed_source_file_name_pdb)):
   if compressed_source_file_name_pdb[i] in output_file_name:
-    print('Yes')
+    print(output_path +'\\'+ compressed_source_file_name_pdb[i], 'Checked')
   else:
-    print("missing: ", compressed_source_file_name_pdb[i])
+    print(output_path +'\\'+ compressed_source_file_name_pdb[i], 'Missing')
+    pass_the_script_flag = pass_the_script_flag - 1  
 
 
 for i in range(len(compressed_source_file_name_dll)):
   if compressed_source_file_name_dll[i] in output_file_name:
-    print('Yes')
+    print(output_path +'\\'+ compressed_source_file_name_dll[i], 'Checked')
   else:
-    print("missing: ", compressed_source_file_name_dll[i])
+    print(output_path +'\\'+ compressed_source_file_name_dll[i], 'Missing')
+    pass_the_script_flag = pass_the_script_flag - 1  
 
 for i in range(len(compressed_source_file_name_bpb)):
   if compressed_source_file_name_bpb[i] in output_file_name:
-    print('Yes')
+    print(output_path +'\\'+ compressed_source_file_name_bpb[i], 'Checked')
   else:
-    print("missing: ", compressed_source_file_name_bpb[i])
+    print(output_path +'\\'+ compressed_source_file_name_bpb[i], 'Missing')
+    pass_the_script_flag = pass_the_script_flag - 1  
 
 for i in range(len(compressed_source_file_name_exe)):
   if compressed_source_file_name_exe[i] in output_file_name:
-    print('Yes')
+    print(output_path +'\\'+ compressed_source_file_name_exe[i], 'Checked')
   else:
-    print("missing: ", compressed_source_file_name_exe[i])
+    print(output_path +'\\'+ compressed_source_file_name_exe[i], 'Missing')
+    pass_the_script_flag = pass_the_script_flag - 1  
 
+
+if (pass_the_script_flag == 1):
+  print('All the files are founded, the testscript is passed', pass_the_script_flag)
+else:
+  print('The testscript is failed', pass_the_script_flag)
