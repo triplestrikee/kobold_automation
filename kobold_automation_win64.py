@@ -1,5 +1,3 @@
-#This script support multiple input files
-
 import shutil
 import os
 from time import sleep
@@ -11,26 +9,40 @@ now = datetime.datetime.now()
 newFolderName = "Kobold_XB1_Test_" + now.strftime("%Y_%m_%d_%H%M")
 print(newFolderName)
 
-# new_asserts_test_folder_name = 'greeting3' 
+# set test folder as empty
+newFolderName = ''
 
-# xbox file path
-# source_path = r'C:\Kobold_Test_Files\Test XB1 source'
-# input_path = r'C:\Kobold_Test_Files\Test XB1 input' 
-# output_path = r'C:\Kobold_Test_Files\Test XB1 output'
+# new_asserts_test_folder_name = 'greeting3' 
 
 # wid64 file path
 source_path = r'C:\Kobold_Test_Files\Test Win64 source'
 input_path = r'C:\Kobold_Test_Files\Test Win64 input' 
 output_path = r'C:\Kobold_Test_Files\Test Win64 output'
 
-copy_file_destination_path = input_path 
+# xbox file path
+# source_path = r'C:\Kobold_Test_Files\Test XB1 source'
+# input_path = r'C:\Kobold_Test_Files\Test XB1 input' 
+# output_path = r'C:\Kobold_Test_Files\Test XB1 output'
+
+# PS4 file path
+# source_path = r'C:\Kobold_Test_Files\Test PS4 source'
+# input_path = r'C:\Kobold_Test_Files\Test PS4 source input' 
+# output_path = r'C:\Kobold_Test_Files\Test PS4 source output'
 
 # set up the flag
 pass_the_script_flag = 1
 
-print(input_path)
-print(output_path)
-print(copy_file_destination_path)
+
+# add folder name to the file path
+input_path = input_path + '\\' + newFolderName
+output_path = output_path + '\\' + newFolderName
+
+copy_file_destination_path = input_path 
+
+print('source file folder:', source_path)
+print('input folder:', input_path)
+print('output folder:',output_path)
+print('copy_file_destination_path:',copy_file_destination_path)
 
 '''Moving the source files to the destination'''
 # shutil.copytree(source_path, copy_file_destination_path)
@@ -114,17 +126,17 @@ source_file_name_elf
 
 print('output files--------------------')
 
-# print(
-# compressed_source_file_name_pdb,
-# compressed_source_file_name_dll,
-# compressed_source_file_name_bpb,
-# compressed_source_file_name_exe,
-# compressed_source_file_name_elf
-# )
+print(
+compressed_source_file_name_pdb,
+compressed_source_file_name_dll,
+compressed_source_file_name_bpb,
+compressed_source_file_name_exe,
+compressed_source_file_name_elf
+)
 
 
 print ('----------------check the presnece of each file in the input folder ----------------')
-print ('_________________________________________________')
+print ('------------------------------------------------------------------------------------')
 input_files = os.listdir(input_path)
 os.chdir(input_path)
 input_file_name = []
@@ -206,8 +218,7 @@ for i in range(len(compressed_source_file_name_exe)):
     print(output_path +'\\'+ compressed_source_file_name_exe[i], 'Missing')
     pass_the_script_flag = pass_the_script_flag - 1  
 
-
 if (pass_the_script_flag == 1):
-  print('All the files are founded, the testscript is passed', pass_the_script_flag)
+  print('All the files are founded, the testscript is passed','Flag:', pass_the_script_flag)
 else:
-  print('The testscript is failed', pass_the_script_flag)
+  print('The testscript is failed','Flag:', pass_the_script_flag)
